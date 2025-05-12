@@ -1,0 +1,95 @@
+/* ブログ一覧のスタイル */
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card-content {
+  padding: 1.5rem;
+}
+
+.blog-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.blog-title a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-title a:hover {
+  color: #0066cc;
+}
+
+.blog-meta {
+  margin-bottom: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.blog-excerpt {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* マークダウンで表示される抜粋内の要素のスタイル */
+.blog-excerpt p {
+  margin: 0 0 0.8rem 0;
+}
+
+.blog-excerpt h1,
+.blog-excerpt h2,
+.blog-excerpt h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.blog-excerpt a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.blog-excerpt ul,
+.blog-excerpt ol {
+  margin-left: 1.5rem;
+}
+
+.read-more {
+  display: inline-block;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover {
+  color: #004c99;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,60 @@
+.login-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.already-logged-in {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.already-logged-in h2 {
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+
+.already-logged-in p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.action-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-button,
+.back-button {
+  display: block;
+  padding: 12px 20px;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.admin-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.admin-button:hover {
+  background-color: #45a049;
+}
+
+.back-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.back-button:hover {
+  background-color: #e5e5e5;
+}

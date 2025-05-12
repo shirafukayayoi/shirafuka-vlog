@@ -1,0 +1,25 @@
+.new-post-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.new-post-page h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.page-description {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .new-post-page {
+    padding: 15px;
+  }
+}
