@@ -18,15 +18,36 @@ export const BlogContext = createContext();
 export const BlogProvider = ({ children }) => {
   // ローカルストレージのキー
   const STORAGE_KEY = "shirafuka-blog-posts"; // 投稿データの状態
+
+  // 初期化関数を修正：ローカルストレージが空または不正な場合は初期データを使用
   const [posts, setPosts] = useState(() => {
-    // ローカルストレージからデータを読み込む試行
-    const savedPosts = localStorage.getItem(STORAGE_KEY);
-    return savedPosts ? JSON.parse(savedPosts) : initialBlogData;
+    try {
+      const savedPosts = localStorage.getItem(STORAGE_KEY);
+      // 保存されたデータがあり、かつ有効なJSONの場合のみパース
+      if (savedPosts && savedPosts !== "undefined" && savedPosts !== "null") {
+        const parsedData = JSON.parse(savedPosts);
+        // 配列であることを確認
+        if (Array.isArray(parsedData) && parsedData.length > 0) {
+          console.log("Loaded posts from localStorage:", parsedData);
+          return parsedData;
+        }
+      }
+      // それ以外の場合は初期データを使用
+      console.log("Using initial blog data:", initialBlogData);
+      return initialBlogData;
+    } catch (error) {
+      console.error("Error loading posts from localStorage:", error);
+      return initialBlogData;
+    }
   });
 
   // 投稿データが変更されたらローカルストレージに保存
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    } catch (error) {
+      console.error("Error saving posts to localStorage:", error);
+    }
   }, [posts]);
 
   /**

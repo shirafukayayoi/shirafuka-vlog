@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom"; // URLパラメータの取得とリンク用
 import ReactMarkdown from "react-markdown"; // マークダウンレンダリング用
 import remarkGfm from "remark-gfm"; // GFM (GitHub Flavored Markdown) サポート用
@@ -20,8 +20,24 @@ const BlogPost = ({ posts }) => {
   // 例：/blog/welcome-to-shirafuka-blog の場合、slugは"welcome-to-shirafuka-blog"になる
   const { slug } = useParams();
 
+  useEffect(() => {
+    console.log("BlogPost - Current slug:", slug);
+    console.log("BlogPost - Posts received:", posts);
+    if (posts && posts.length > 0) {
+      console.log("BlogPost - First post:", posts[0]);
+      console.log(
+        "BlogPost - Matching post:",
+        posts.find((p) => p.slug === slug)
+      );
+    } else {
+      console.log("BlogPost - No posts available or empty array");
+    }
+  }, [posts, slug]);
+
   // 受け取ったslugに一致する記事を探す
-  const post = posts.find((post) => post.slug === slug);
+  const post = Array.isArray(posts)
+    ? posts.find((post) => post.slug === slug)
+    : null;
 
   // 記事が見つからない場合のエラー表示
   if (!post) {
@@ -39,6 +55,7 @@ const BlogPost = ({ posts }) => {
   // 記事が見つかった場合、記事の内容を表示
   return (
     <article className="blog-post">
+      {" "}
       <header className="blog-post-header">
         <h1 className="blog-post-title">{post.title}</h1>
         <div className="blog-post-meta">
@@ -47,7 +64,7 @@ const BlogPost = ({ posts }) => {
             {new Date(post.date).toLocaleDateString("ja-JP")}
           </span>
         </div>
-      </header>{" "}
+      </header>
       <div className="blog-post-content">
         {/* ReactMarkdownを使用してマークダウンコンテンツをレンダリング */}
         <ReactMarkdown
@@ -90,7 +107,6 @@ const BlogPost = ({ posts }) => {
             ),
           }}
         >
-          {" "}
           {post.content.trim()}
         </ReactMarkdown>
       </div>
